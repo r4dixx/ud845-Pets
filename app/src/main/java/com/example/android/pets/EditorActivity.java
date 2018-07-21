@@ -32,16 +32,24 @@ import android.widget.Spinner;
  */
 public class EditorActivity extends AppCompatActivity {
 
-    /** EditText field to enter the pet's name */
+    /**
+     * EditText field to enter the pet's name
+     */
     private EditText mNameEditText;
 
-    /** EditText field to enter the pet's breed */
+    /**
+     * EditText field to enter the pet's breed
+     */
     private EditText mBreedEditText;
 
-    /** EditText field to enter the pet's weight */
+    /**
+     * EditText field to enter the pet's weight
+     */
     private EditText mWeightEditText;
 
-    /** EditText field to enter the pet's gender */
+    /**
+     * EditText field to enter the pet's gender
+     */
     private Spinner mGenderSpinner;
 
     /**
@@ -56,10 +64,10 @@ public class EditorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_editor);
 
         // Find all relevant views that we will need to read user input from
-        mNameEditText = (EditText) findViewById(R.id.edit_pet_name);
-        mBreedEditText = (EditText) findViewById(R.id.edit_pet_breed);
-        mWeightEditText = (EditText) findViewById(R.id.edit_pet_weight);
-        mGenderSpinner = (Spinner) findViewById(R.id.spinner_gender);
+        mNameEditText = findViewById(R.id.edit_pet_name);
+        mBreedEditText = findViewById(R.id.edit_pet_breed);
+        mWeightEditText = findViewById(R.id.edit_pet_weight);
+        mGenderSpinner = findViewById(R.id.spinner_gender);
 
         setupSpinner();
     }
