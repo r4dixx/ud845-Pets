@@ -102,11 +102,17 @@ public class CatalogActivity extends AppCompatActivity {
             // the information from each column in this order.
             displayView.setText("The pets table contains " + cursor.getCount() + " pets.\n\n");
             displayView.append(PetEntry._ID + " - " +
-                    PetEntry.COLUMN_NAME + "\n");
+                    PetEntry.COLUMN_NAME + " - " +
+                    PetEntry.COLUMN_BREED + " - " +
+                    PetEntry.COLUMN_GENDER + " - " +
+                    PetEntry.COLUMN_WEIGHT + "\n");
 
             // Figure out the index of each column
             int idColumnIndex = cursor.getColumnIndex(PetEntry._ID);
             int nameColumnIndex = cursor.getColumnIndex(PetEntry.COLUMN_NAME);
+            int breedColumnIndex = cursor.getColumnIndex(PetEntry.COLUMN_BREED);
+            int genderColumnIndex = cursor.getColumnIndex(PetEntry.COLUMN_GENDER);
+            int weightColumnIndex = cursor.getColumnIndex(PetEntry.COLUMN_WEIGHT);
 
             // Iterate through all the returned rows in the cursor
             while (cursor.moveToNext()) {
@@ -114,9 +120,15 @@ public class CatalogActivity extends AppCompatActivity {
                 // at the current row the cursor is on.
                 int currentID = cursor.getInt(idColumnIndex);
                 String currentName = cursor.getString(nameColumnIndex);
+                String currentBreed = cursor.getString(breedColumnIndex);
+                int currentGender = cursor.getInt(genderColumnIndex);
+                int currentWeight = cursor.getInt(weightColumnIndex);
                 // Display the values from each column of the current row in the cursor in the TextView
-                displayView.append(("\n" + currentID + " - " +
-                        currentName));
+                displayView.append(("\n" + currentID + " - "
+                        + currentName + " - "
+                        + currentBreed + " - "
+                        + currentGender + " - "
+                        + currentWeight));
             }
         } finally {
             // Always close the cursor when you're done reading from it. This releases all its
