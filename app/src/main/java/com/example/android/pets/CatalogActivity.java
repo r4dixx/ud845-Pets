@@ -63,16 +63,9 @@ public class CatalogActivity extends AppCompatActivity {
     }
 
     private void displayDatabaseInfo() {
-        // To access our database, we instantiate our subclass of SQLiteOpenHelper
-        // and pass the context, which is the current activity.
-        PetDbHelper mDbHelper = new PetDbHelper(this);
 
-        // Create and/or open a database to read from it
-        SQLiteDatabase db = mDbHelper.getReadableDatabase();
-
-        // Perform this raw SQL query "SELECT * FROM pets"
-        // to get a Cursor that contains all rows from the pets table.
-
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query
         String[] projection = {
                 PetEntry._ID,
                 PetEntry.COLUMN_NAME,
@@ -81,11 +74,10 @@ public class CatalogActivity extends AppCompatActivity {
                 PetEntry.COLUMN_WEIGHT
         };
 
-        Cursor cursor = db.query(
-                PetEntry.TABLE_NAME,
+        // Performs a query on the ContentProvider using the ContentResolver
+        Cursor cursor = getContentResolver().query(
+                PetEntry.CONTENT_URI,
                 projection,
-                null,
-                null,
                 null,
                 null,
                 null);
