@@ -136,6 +136,14 @@ public class PetProvider extends ContentProvider {
             throw new IllegalArgumentException("Pet requires valid gender");
         }
 
+        // If the weight is provided, check that it's greater than or equal to 0 kg
+        Integer weight = values.getAsInteger(PetEntry.COLUMN_WEIGHT);
+        if (weight != null && weight < 0) {
+            throw new IllegalArgumentException("Pet requires valid weight");
+        }
+
+        // No need to check the breed, any value is valid (including null).
+
         // Get writeable database
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
