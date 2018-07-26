@@ -130,7 +130,11 @@ public class PetProvider extends ContentProvider {
             throw new IllegalArgumentException("Pet requires a name");
         }
 
-        // TODO: Finish sanity checking the rest of the attributes in ContentValues
+        // If the gender is null or it’s not one of the valid gender values
+        Integer gender = values.getAsInteger(PetEntry.COLUMN_GENDER);
+        if (gender == null || !PetEntry.isValidGender(gender)) {
+            throw new IllegalArgumentException("Pet requires valid gender");
+        }
 
         // Get writeable database
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
