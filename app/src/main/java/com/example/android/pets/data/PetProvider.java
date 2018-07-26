@@ -124,6 +124,14 @@ public class PetProvider extends ContentProvider {
      * for that specific row in the database.
      */
     private Uri insertPet(Uri uri, ContentValues values) {
+        // Check that the name is not null
+        String name = values.getAsString(PetEntry.COLUMN_NAME);
+        if (name == null) {
+            throw new IllegalArgumentException("Pet requires a name");
+        }
+
+        // TODO: Finish sanity checking the rest of the attributes in ContentValues
+
         // Get writeable database
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
