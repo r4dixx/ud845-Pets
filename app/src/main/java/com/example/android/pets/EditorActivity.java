@@ -61,7 +61,7 @@ public class EditorActivity extends AppCompatActivity {
      * Gender of the pet. The possible values are:
      * 0 for unknown gender, 1 for male, 2 for female.
      */
-    private int mGender = 0;
+    private int mGender = PetEntry.GENDER_UNKNOWN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +111,7 @@ public class EditorActivity extends AppCompatActivity {
             // Because AdapterView is an abstract class, onNothingSelected must be defined
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                mGender = 0; // Unknown
+                mGender = PetEntry.GENDER_UNKNOWN; // Unknown
             }
         });
     }
@@ -136,11 +136,11 @@ public class EditorActivity extends AppCompatActivity {
         // Show a toast message depending on whether or not the insertion was successful
         if (newUri == null) {
             // If the new content URI is null, then there was an error with insertion.
-            Toast.makeText(this, "Error with saving pet",
+            Toast.makeText(this, R.string.editor_insert_pet_failed,
                     Toast.LENGTH_SHORT).show();
         } else {
             // Otherwise, the insertion was successful and we can display a toast.
-            Toast.makeText(this, "Pet saved",
+            Toast.makeText(this, R.string.editor_insert_pet_successful,
                     Toast.LENGTH_SHORT).show();
         }
     }

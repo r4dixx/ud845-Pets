@@ -123,21 +123,13 @@ public class CatalogActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu options from the res/menu/menu_catalog.xml file.
-        // This adds menu items to the app bar.
-        getMenuInflater().inflate(R.menu.menu_catalog, menu);
-        return true;
-    }
-
     private void insertPet() {
 
         ContentValues values = new ContentValues();
 
         values.put(PetEntry.COLUMN_NAME, "Toto");
         values.put(PetEntry.COLUMN_BREED, "Terrier");
-        values.put(PetEntry.COLUMN_GENDER, PetEntry.COLUMN_GENDER);
+        values.put(PetEntry.COLUMN_GENDER, PetEntry.GENDER_MALE);
         values.put(PetEntry.COLUMN_WEIGHT, 7);
 
         // Insert a new row for Toto into the provider using the ContentResolver.
@@ -145,6 +137,14 @@ public class CatalogActivity extends AppCompatActivity {
         // into the pets database table.
         // Receive the new content URI that will allow us to access Toto's data in the future.
         Uri newUri = getContentResolver().insert(PetEntry.CONTENT_URI, values);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu options from the res/menu/menu_catalog.xml file.
+        // This adds menu items to the app bar.
+        getMenuInflater().inflate(R.menu.menu_catalog, menu);
+        return true;
     }
 
     @Override

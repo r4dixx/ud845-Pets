@@ -18,6 +18,11 @@ import com.example.android.pets.data.PetContract.PetEntry;
 public class PetProvider extends ContentProvider {
 
     /**
+     * Tag for the log messages
+     */
+    public static final String LOG_TAG = PetProvider.class.getSimpleName();
+
+    /**
      * URI matcher code for the content URI for the pets table
      */
     private static final int PETS = 100;
@@ -40,14 +45,20 @@ public class PetProvider extends ContentProvider {
         // should recognize. All paths added to the UriMatcher have a corresponding code to return
         // when a match is found.
 
+        // The content URI of the form "content://com.example.android.pets/pets" will map to the
+        // integer code {@link #PETS}. This URI is used to provide access to MULTIPLE rows
+        // of the pets table.
         sUriMatcher.addURI(PetContract.CONTENT_AUTHORITY, PetContract.PATH_PETS, PETS);
+
+        // The content URI of the form "content://com.example.android.pets/pets/#" will map to the
+        // integer code {@link #PET_ID}. This URI is used to provide access to ONE single row
+        // of the pets table.
+        //
+        // In this case, the "#" wildcard is used where "#" can be substituted for an integer.
+        // For example, "content://com.example.android.pets/pets/3" matches, but
+        // "content://com.example.android.pets/pets" (without a number at the end) doesn't match.
         sUriMatcher.addURI(PetContract.CONTENT_AUTHORITY, PetContract.PATH_PETS + "/#", PET_ID);
     }
-
-    /**
-     * Tag for the log messages
-     */
-    public static final String LOG_TAG = PetProvider.class.getSimpleName();
 
     /**
      * Database helper object
@@ -163,8 +174,7 @@ public class PetProvider extends ContentProvider {
      * Updates the data at the given selection and selection arguments, with the new ContentValues.
      */
     @Override
-    public int update(Uri uri, ContentValues contentValues, String selection,
-                      String[] selectionArgs) {
+    public int update(Uri uri, ContentValues contentValues, String selection, String[] selectionArgs) {
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case PETS:

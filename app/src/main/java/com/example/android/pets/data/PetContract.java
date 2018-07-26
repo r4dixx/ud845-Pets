@@ -33,8 +33,13 @@ public final class PetContract {
      */
     public static final String PATH_PETS = "pets";
 
+    /**
+     * Inner class that defines constant values for the pets database table.
+     * Each entry in the table represents a single pet.
+     */
     public static abstract class PetEntry implements BaseColumns {
 
+        /** The content URI to access the pet data in the provider */
         public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_PETS);
 
         /**
