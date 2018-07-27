@@ -11,7 +11,6 @@ import android.util.Log;
 
 import com.example.android.pets.data.PetContract.PetEntry;
 
-
 /**
  * {@link ContentProvider} for Pets app.
  */
@@ -65,18 +64,12 @@ public class PetProvider extends ContentProvider {
      */
     private PetDbHelper mDbHelper;
 
-    /**
-     * Initialize the provider and the database helper object.
-     */
     @Override
     public boolean onCreate() {
         mDbHelper = new PetDbHelper(getContext());
         return true;
     }
 
-    /**
-     * Perform the query for the given URI. Use the given projection, selection, selection arguments, and sort order.
-     */
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         // Get readable database
@@ -104,7 +97,7 @@ public class PetProvider extends ContentProvider {
                 // arguments that will fill in the "?". Since we have 1 question mark in the
                 // selection, we have 1 String in the selection arguments' String array.
                 selection = PetEntry._ID + "=?";
-                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
 
                 // This will perform a query on the pets table where the _id equals 3 to return a
                 // Cursor containing that row of the table.
@@ -122,9 +115,6 @@ public class PetProvider extends ContentProvider {
         return cursor;
     }
 
-    /**
-     * Insert new data into the provider with the given ContentValues.
-     */
     @Override
     public Uri insert(Uri uri, ContentValues contentValues) {
         final int match = sUriMatcher.match(uri);
@@ -179,9 +169,6 @@ public class PetProvider extends ContentProvider {
         return ContentUris.withAppendedId(uri, id);
     }
 
-    /**
-     * Updates the data at the given selection and selection arguments, with the new ContentValues.
-     */
     @Override
     public int update(Uri uri, ContentValues contentValues, String selection, String[] selectionArgs) {
         final int match = sUriMatcher.match(uri);
@@ -193,7 +180,7 @@ public class PetProvider extends ContentProvider {
                 // so we know which row to update. Selection will be "_id=?" and selection
                 // arguments will be a String array containing the actual ID.
                 selection = PetEntry._ID + "=?";
-                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
                 return updatePet(uri, contentValues, selection, selectionArgs);
             default:
                 throw new IllegalArgumentException("Update is not supported for " + uri);
@@ -257,9 +244,6 @@ public class PetProvider extends ContentProvider {
         return rowsUpdated;
     }
 
-    /**
-     * Delete the data at the given selection and selection arguments.
-     */
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         // Get writeable database
@@ -294,9 +278,6 @@ public class PetProvider extends ContentProvider {
         return rowsDeleted;
     }
 
-    /**
-     * Returns the MIME type of data for the content URI.
-     */
     @Override
     public String getType(Uri uri) {
         final int match = sUriMatcher.match(uri);

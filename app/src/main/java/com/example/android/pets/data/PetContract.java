@@ -1,7 +1,7 @@
 package com.example.android.pets.data;
 
-import android.content.ContentResolver;
 import android.net.Uri;
+import android.content.ContentResolver;
 import android.provider.BaseColumns;
 
 public final class PetContract {
@@ -37,7 +37,7 @@ public final class PetContract {
      * Inner class that defines constant values for the pets database table.
      * Each entry in the table represents a single pet.
      */
-    public static abstract class PetEntry implements BaseColumns {
+    public static final class PetEntry implements BaseColumns {
 
         /** The content URI to access the pet data in the provider */
         public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_PETS);

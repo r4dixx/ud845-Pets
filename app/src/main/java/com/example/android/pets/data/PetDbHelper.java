@@ -8,8 +8,6 @@ import com.example.android.pets.data.PetContract.PetEntry;
 
 public class PetDbHelper extends SQLiteOpenHelper {
 
-    public static final String LOG_TAG = PetDbHelper.class.getSimpleName();
-
     private static final String DB_NAME = "shelter.db";
     private static final int DB_VERSION = 1;
 

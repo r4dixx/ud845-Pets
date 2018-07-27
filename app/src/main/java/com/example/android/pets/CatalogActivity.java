@@ -60,7 +60,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         });
 
         // Find the ListView which will be populated with the pet data
-        ListView petListView = (ListView) findViewById(R.id.list);
+        ListView petListView = findViewById(R.id.list);
 
         // Find and set empty view on the ListView, so that it only shows when the list has 0 items.
         View emptyView = findViewById(R.id.empty_view);
@@ -83,7 +83,6 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
         // Kick off the loader
         getLoaderManager().initLoader(PET_LOADER, null, this);
-
     }
 
     private void insertPet() {
@@ -99,7 +98,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         // Use the {@link PetEntry#CONTENT_URI} to indicate that we want to insert
         // into the pets database table.
         // Receive the new content URI that will allow us to access Toto's data in the future.
-        Uri newUri = getContentResolver().insert(PetEntry.CONTENT_URI, values);
+        getContentResolver().insert(PetEntry.CONTENT_URI, values);
     }
 
     /**
@@ -159,7 +158,6 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         // Update the PetCursorAdapter with this new cursor containing updated data
         mCursorAdapter.swapCursor(data);
-
     }
 
     @Override
